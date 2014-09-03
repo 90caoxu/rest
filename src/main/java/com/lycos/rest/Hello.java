@@ -14,7 +14,7 @@ import com.sun.jersey.spi.resource.Singleton;
  * @date 2014年9月2日 下午10:38:47
  */
 @Singleton
-@Path("/hello")
+@Path("/helloworld")
 public class Hello {
 
     @GET
