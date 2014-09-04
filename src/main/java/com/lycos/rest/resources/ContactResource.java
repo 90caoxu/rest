@@ -49,23 +49,29 @@ public class ContactResource {
     @GET
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     public Contact getContact() {
+        log.info("class ContactResource,method getContact() begin.");
         Contact cont = ContactStore.getStore().get(contact);
         if (cont == null)
             throw new NotFoundException("No such Contact.");
+        log.info("class ContactResource,method getContact() end.");
         return cont;
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
     public Response putContact(JAXBElement<Contact> jaxbContact) {
+        log.info("class ContactResource,method putContact() one begin.");
         Contact c = jaxbContact.getValue();
+        log.info("class ContactResource,method putContact() one end.");
         return putAndGetResponse(c);
     }
 
     @PUT
     public Response putContact(@Context HttpHeaders herders, byte[] in) {
+        log.info("class ContactResource,method putContact() two begin.");
         Map<String, String> params = ParamUtil.parse(new String(in));
         Contact c = new Contact(params.get("id"), params.get("name"), new ArrayList<Address>());
+        log.info("class ContactResource,method putContact() two end.");
         return putAndGetResponse(c);
     }
 
@@ -82,8 +88,10 @@ public class ContactResource {
 
     @DELETE
     public void deleteContact() {
+        log.info("class ContactResource,method deleteContact() begin.");
         Contact c = ContactStore.getStore().remove(contact);
         if (c == null)
             throw new NotFoundException("No such Contact.");
+        log.info("class ContactResource,method deleteContact() end.");
     }
 }
